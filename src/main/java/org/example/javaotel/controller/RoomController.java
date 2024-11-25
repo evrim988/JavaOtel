@@ -27,7 +27,7 @@ public class RoomController {
 		return ResponseEntity.ok(BaseResponse.<Boolean>builder()
 		                                     .code(200)
 		                                     .success(true)
-		                                     .message("Reservation successfully added")
+		                                     .message("Oda Ekleme İşlemi Başarılı...")
 		                                     .data(true)
 		                                     .build());
 	}
