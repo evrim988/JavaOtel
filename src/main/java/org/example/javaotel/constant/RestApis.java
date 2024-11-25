@@ -13,7 +13,7 @@ public class RestApis {
     public static final String ADD_RESERVATION = "/add-Reservation";
     
     public static final String ROOM = ROOT+ "/room";
-    public static final String ADD_ROOM = "/add-Room";
+    public static final String ADD_ROOM = "/add-room";
 
 
 

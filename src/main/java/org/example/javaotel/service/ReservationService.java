@@ -11,12 +11,14 @@ import org.example.javaotel.exception.JavaOtelException;
 import org.example.javaotel.mapper.ReservationMapper;
 import org.example.javaotel.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class ReservationService {
 	private final ReservationRepository reservationRepository;
 	private final RoomService roomService;

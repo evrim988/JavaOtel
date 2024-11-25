@@ -20,6 +20,7 @@ import static org.example.javaotel.constant.RestApis.*;
 @RequiredArgsConstructor
 public class RoomController {
 	private final RoomService roomService;
+
 	@PostMapping(ADD_ROOM)
 	public ResponseEntity<BaseResponse<Boolean>> addReservation(@RequestBody @Valid AddRoomRequestDto dto){
 		roomService.addRoom(dto);

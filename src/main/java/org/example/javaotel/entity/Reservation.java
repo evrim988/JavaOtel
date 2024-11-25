@@ -18,8 +18,8 @@ public class Reservation extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 	Long roomId;
-	Long adultCount;
-	Long childCount;
+	String adultCount;
+	String childCount;
 	String description;
 	String customerName;
 	String customerEmail;
