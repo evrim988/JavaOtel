@@ -1,13 +1,12 @@
 package org.example.javaotel.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 
@@ -18,12 +17,14 @@ import java.time.LocalDate;
 @MappedSuperclass
 public class BaseEntity {
 
+    @Enumerated(EnumType.STRING)
     @Builder.Default
     EState state = EState.ACTIVE;
 
-
+    @CreationTimestamp
     LocalDate createAt;
 
+    @CreationTimestamp
     LocalDate updateAt;
 
 
