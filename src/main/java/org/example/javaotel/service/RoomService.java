@@ -8,6 +8,8 @@ import org.example.javaotel.mapper.RoomMapper;
 import org.example.javaotel.repository.RoomRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class RoomService {
@@ -16,5 +18,9 @@ public class RoomService {
 	public void addRoom(AddRoomRequestDto dto) {
 		Room addRoom = RoomMapper.INSTANCE.fromAddRoomRequestDto(dto);
 		roomRepository.save(addRoom);
+	}
+
+	public Optional<Room> findByRoomId(Long roomId) {
+		return roomRepository.findById(roomId);
 	}
 }

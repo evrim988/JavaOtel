@@ -22,9 +22,11 @@ public class BaseEntity {
     EState state = EState.ACTIVE;
 
     @CreationTimestamp
+    @Column(updatable = false)
     LocalDate createAt;
 
     @CreationTimestamp
+
     LocalDate updateAt;
 
 

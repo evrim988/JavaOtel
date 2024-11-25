@@ -18,13 +18,14 @@ public class Reservation extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 	Long roomId;
+	Long adultCount;
+	Long childCount;
+	String description;
 	String customerName;
 	String customerEmail;
 	LocalDate checkInDate;
 	LocalDate checkOutDate;
-	@Enumerated(EnumType.STRING)
-	ECustomerType customerType;
-	
-	
+
+
 	
 }

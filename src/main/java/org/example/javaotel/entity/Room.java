@@ -15,8 +15,10 @@ public class Room extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
+
 	@Enumerated(EnumType.STRING)
 	ERoomType roomType;
+
 	@Enumerated(EnumType.STRING)
 	ERoomStatus roomStatus;
 }
