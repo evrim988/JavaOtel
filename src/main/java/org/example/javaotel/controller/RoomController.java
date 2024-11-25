@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.example.javaotel.constant.RestApis.*;
 
 @RestController
-@RequestMapping
+@RequestMapping(ROOM)
 @RequiredArgsConstructor
 public class RoomController {
 	private final RoomService roomService;
