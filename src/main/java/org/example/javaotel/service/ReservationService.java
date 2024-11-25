@@ -29,12 +29,12 @@ public class ReservationService {
 		Room room = optionalRoom.get();
 
 
-		if(!(existRoomAvailable(dto.roomId(), dto.checkInDate(), dto.checkOutDate()))){
+		if(existRoomAvailable(dto.roomId(), dto.checkInDate(), dto.checkOutDate())){
 			throw new JavaOtelException(ErrorType.ROOM_UNAVAILABLE);
 		}
 
 
-		if (existRoomAvailable(dto.roomId(), dto.checkInDate(), dto.checkOutDate())) {
+		if (!(existRoomAvailable(dto.roomId(), dto.checkInDate(), dto.checkOutDate()))) {
 			Reservation reservation = ReservationMapper.INSTANCE.fromAddReservationRequestDto(dto);
 			room.setRoomStatus(ERoomStatus.UNAVAILABLE);
 			reservationRepository.save(reservation);
@@ -43,8 +43,10 @@ public class ReservationService {
 
 	}
 
+
 	public boolean existRoomAvailable(Long roomId, LocalDate checkInDate, LocalDate checkOutDate) {
-		Boolean exists = reservationRepository.existsByRoomIdAndCheckInDateAndCheckOutDate(roomId, checkInDate, checkOutDate);
+		Boolean exists = reservationRepository.existsByRoomIdAndCheckInDateGreaterThanEqualAndCheckOutDateLessThanEqual(roomId, checkInDate, checkOutDate);
+		System.out.println(exists);
 		return exists;
 	}
 
