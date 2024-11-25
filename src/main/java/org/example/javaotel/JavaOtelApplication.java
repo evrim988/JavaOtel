@@ -8,6 +8,7 @@ public class JavaOtelApplication {
  
     public static void main(String[] args) {
         SpringApplication.run(JavaOtelApplication.class, args);
+
     }
 
 }
