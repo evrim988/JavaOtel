@@ -30,7 +30,7 @@ public record AddReservationRequestDto(
 		Long adultCount,
 
 
-		@Max(2)
+		@Max(3)
 		Long childCount
 ) {
 }
