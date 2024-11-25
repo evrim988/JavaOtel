@@ -10,6 +10,10 @@ public class RestApis {
     private static final String ROOT = VERSION+ DEVELOPER;
 
     public static final String RESERVATION = ROOT+ "/reservation";
+    public static final String ADD_RESERVATION = "/add-Reservation";
+    
+    public static final String ROOM = ROOT+ "/room";
+    public static final String ADD_ROOM = "/add-Room";
 
 
 
