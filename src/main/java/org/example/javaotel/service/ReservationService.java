@@ -21,7 +21,7 @@ public class ReservationService {
 	private final ReservationRepository reservationRepository;
 	private final RoomService roomService;
 	
-	public void addReservation(AddReservationRequestDto dto) {
+	public void addReservation(@Valid AddReservationRequestDto dto) {
 		Optional<Room> optionalRoom =  roomService.findByRoomId(dto.roomId());
 		if(optionalRoom.isEmpty())
 			throw new JavaOtelException(ErrorType.ROOM_NOTFOUND);

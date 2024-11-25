@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 
@@ -25,8 +26,7 @@ public class BaseEntity {
     @Column(updatable = false)
     LocalDate createAt;
 
-    @CreationTimestamp
-
+    @UpdateTimestamp
     LocalDate updateAt;
 
 
