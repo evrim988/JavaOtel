@@ -4,20 +4,22 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.javaotel.dto.request.AddReservationRequestDto;
 import org.example.javaotel.dto.request.AddRoomRequestDto;
+import org.example.javaotel.dto.request.UpdateRoomRequestDto;
 import org.example.javaotel.dto.response.BaseResponse;
+import org.example.javaotel.entity.Room;
 import org.example.javaotel.service.RoomService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+
+import java.util.List;
 
 import static org.example.javaotel.constant.RestApis.*;
 
 @RestController
 @RequestMapping(ROOM)
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class RoomController {
 	private final RoomService roomService;
 
@@ -31,4 +33,37 @@ public class RoomController {
 		                                     .data(true)
 		                                     .build());
 	}
+
+	@GetMapping(ROOM_LIST)
+	public ResponseEntity<BaseResponse<List<Room>>> findAllRooms() {
+		return ResponseEntity.ok(BaseResponse.<List<Room>>builder()
+						.code(200)
+						.success(true)
+						.message("Oda listeleme işlemi başarılı...")
+						.data(roomService.findAll())
+				.build());
+	}
+
+	@PutMapping(ROOM_UPDATE)
+	public ResponseEntity<BaseResponse<Boolean>> updateRoom(@RequestBody @Valid UpdateRoomRequestDto dto){
+		roomService.updateRoom(dto);
+		return ResponseEntity.ok(BaseResponse.<Boolean>builder()
+						.code(200)
+						.success(true)
+						.message("Oda başarı ile güncellendi.")
+						.data(true)
+				.build());
+	}
+
+	@PostMapping(ROOM_DELETE)
+	public ResponseEntity<BaseResponse<Boolean>> deleteRoom(@RequestBody @Valid Long id){
+		roomService.deleteRoom(id);
+		return ResponseEntity.ok(BaseResponse.<Boolean>builder()
+				.code(200)
+				.success(true)
+				.message("Oda silme işlemi başarılı.")
+				.data(true)
+				.build());
+	}
+
 }

@@ -19,6 +19,7 @@ public class Room extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	ERoomType roomType;
 
+	@Builder.Default
 	@Enumerated(EnumType.STRING)
-	ERoomStatus roomStatus;
+	ERoomStatus roomStatus = ERoomStatus.AVAILABLE;
 }

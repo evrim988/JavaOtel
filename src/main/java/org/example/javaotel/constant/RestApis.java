@@ -14,6 +14,9 @@ public class RestApis {
     
     public static final String ROOM = ROOT+ "/room";
     public static final String ADD_ROOM = "/add-room";
+    public static final String ROOM_LIST = "/room-list";
+    public static final String ROOM_UPDATE = "/room-update";
+    public static final String ROOM_DELETE = "/room-delete";
 
 
 
