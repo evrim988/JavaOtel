@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.javaotel.dto.request.AddReservationRequestDto;
 import org.example.javaotel.dto.request.AddRoomRequestDto;
+import org.example.javaotel.dto.request.DeleteRoomRequestDto;
 import org.example.javaotel.dto.request.UpdateRoomRequestDto;
 import org.example.javaotel.dto.response.BaseResponse;
 import org.example.javaotel.entity.Room;
@@ -56,8 +57,8 @@ public class RoomController {
 	}
 
 	@PostMapping(ROOM_DELETE)
-	public ResponseEntity<BaseResponse<Boolean>> deleteRoom(@RequestBody @Valid Long id){
-		roomService.deleteRoom(id);
+	public ResponseEntity<BaseResponse<Boolean>> deleteRoom(@RequestBody @Valid DeleteRoomRequestDto dto){
+		roomService.deleteRoom(dto.id());
 		return ResponseEntity.ok(BaseResponse.<Boolean>builder()
 				.code(200)
 				.success(true)
