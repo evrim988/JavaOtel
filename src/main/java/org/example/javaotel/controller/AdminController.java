@@ -32,8 +32,8 @@ public class AdminController {
     }
 
     @PostMapping(ADMIN_LOGIN)
-    public ResponseEntity<BaseResponse<Boolean>> doLogin(@RequestBody @Valid AdminLoginRequestDto dto){
-        return ResponseEntity.ok(BaseResponse.<Boolean>builder()
+    public ResponseEntity<BaseResponse<String>> doLogin(@RequestBody @Valid AdminLoginRequestDto dto){
+        return ResponseEntity.ok(BaseResponse.<String>builder()
                         .code(200)
                         .success(true)
                         .message("Ok.")

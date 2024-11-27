@@ -9,6 +9,7 @@ import org.example.javaotel.exception.ErrorType;
 import org.example.javaotel.exception.JavaOtelException;
 import org.example.javaotel.mapper.AdminMapper;
 import org.example.javaotel.repository.AdminRepository;
+import org.example.javaotel.utility.JwtManager;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,13 +18,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AdminService {
     private final AdminRepository adminRepository;
+    private final JwtManager jwtManager;
 
-    public boolean doLogin(@Valid AdminLoginRequestDto dto) {
+    public String doLogin(@Valid AdminLoginRequestDto dto) {
         Optional<Admin> optionalAdmin = adminRepository.findByUserNameAndPassword(dto.userName(), dto.password());
         if(optionalAdmin.isEmpty())
             throw new JavaOtelException(ErrorType.ADMIN_NOTFOUND);
-        return true;
-
+        String token = jwtManager.createToken(optionalAdmin.get().getId());
+        return token;
     }
 
     public void addAdmin(@Valid CreateAdminRequestDto dto) {
