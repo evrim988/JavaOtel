@@ -3,17 +3,22 @@ package org.example.javaotel.service;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.javaotel.dto.request.AddReservationRequestDto;
+import org.example.javaotel.dto.request.UpdateReservationRequestDto;
 import org.example.javaotel.entity.ERoomStatus;
+import org.example.javaotel.entity.EState;
 import org.example.javaotel.entity.Reservation;
 import org.example.javaotel.entity.Room;
 import org.example.javaotel.exception.ErrorType;
 import org.example.javaotel.exception.JavaOtelException;
 import org.example.javaotel.mapper.ReservationMapper;
 import org.example.javaotel.repository.ReservationRepository;
+import org.example.javaotel.views.VwReservation;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -53,4 +58,14 @@ public class ReservationService {
 	}
 
 
+	public List<Reservation> findAll() {
+		return reservationRepository.findAll().stream()
+				.filter(reservation -> reservation.getState() == EState.ACTIVE).sorted(Comparator.comparing(Reservation::getId)).toList();
+	}
+
+	public void updateReservation(UpdateReservationRequestDto dto) {
+		Optional<Reservation> reservationOptional = reservationRepository.findById(dto.id());
+		if (reservationOptional.isEmpty())
+			throw new JavaOtelException(ErrorType.RESERVATION_NOTFOUND);
+	}
 }

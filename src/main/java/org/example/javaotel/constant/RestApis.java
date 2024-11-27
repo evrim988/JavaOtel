@@ -19,6 +19,12 @@ public class RestApis {
     public static final String ROOM_DELETE = "/room-delete";
 
 
+    public static final String RESERVATION_LIST = "/reservation-list";
+    public static final String RESERVATION_UPDATE = "/reservation-update";
+
+
+
+
 
 
 }
