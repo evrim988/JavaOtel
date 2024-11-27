@@ -2,7 +2,9 @@ package org.example.javaotel.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.example.javaotel.dto.request.AddReservationRequestDto;
+import org.example.javaotel.dto.request.DeleteReservationRequestDto;
 import org.example.javaotel.dto.request.UpdateReservationRequestDto;
 import org.example.javaotel.dto.response.BaseResponse;
 import org.example.javaotel.entity.Reservation;
@@ -52,6 +54,17 @@ public class ReservationController {
 						.success(true)
 						.message("Reservation successfully updated")
 						.data(true)
+				.build());
+	}
+
+	@PostMapping(RESERVATION_DELETE)
+	public ResponseEntity<BaseResponse<Boolean>> deleteReservation(@RequestBody @Valid DeleteReservationRequestDto dto){
+		reservationService.deleteByReservationId(dto.id());
+		return ResponseEntity.ok(BaseResponse.<Boolean>builder()
+				.code(200)
+				.success(true)
+				.message("Reservation successfully deleted")
+				.data(true)
 				.build());
 	}
 }

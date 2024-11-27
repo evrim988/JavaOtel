@@ -67,5 +67,30 @@ public class ReservationService {
 		Optional<Reservation> reservationOptional = reservationRepository.findById(dto.id());
 		if (reservationOptional.isEmpty())
 			throw new JavaOtelException(ErrorType.RESERVATION_NOTFOUND);
+
+		Optional<Room> optionalRoom = roomService.findByRoomId(dto.roomId());
+		if(optionalRoom.isEmpty() || optionalRoom.get().getState().equals(EState.PASSIVE) )
+			throw new JavaOtelException(ErrorType.ROOM_NOTFOUND);
+
+		if(optionalRoom.get().getRoomStatus().equals(ERoomStatus.UNAVAILABLE)){
+			throw new JavaOtelException(ErrorType.ROOM_UNAVAILABLE);
+		}
+
+
+		Reservation reservation = reservationOptional.get();
+
+		if(optionalRoom.get().getRoomStatus().equals(ERoomStatus.AVAILABLE)){
+			reservationRepository.save(ReservationMapper.INSTANCE.fromUpdateReservationRequestDto(dto, reservation));
+		}
+
+	}
+
+	public void deleteByReservationId(Long id) {
+		Optional<Reservation> reservationOptional = reservationRepository.findById(id);
+		if (reservationOptional.isEmpty())
+			throw new JavaOtelException(ErrorType.RESERVATION_NOTFOUND);
+		Reservation reservation = reservationOptional.get();
+		reservation.setState(EState.PASSIVE);
+		reservationRepository.save(reservation);
 	}
 }
