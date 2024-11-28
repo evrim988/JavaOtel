@@ -7,16 +7,15 @@ import static org.example.javaotel.constant.RestApis.*;
 import org.example.javaotel.dto.request.AdminLoginRequestDto;
 import org.example.javaotel.dto.request.CreateAdminRequestDto;
 import org.example.javaotel.dto.response.BaseResponse;
+import org.example.javaotel.entity.Admin;
 import org.example.javaotel.service.AdminService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(ADMIN)
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class AdminController {
     private final AdminService adminService;
 
@@ -38,6 +37,16 @@ public class AdminController {
                         .success(true)
                         .message("Ok.")
                         .data(adminService.doLogin(dto))
+                .build());
+    }
+
+    @GetMapping(GET_PROFILE)
+    public ResponseEntity<BaseResponse<Admin>> getProfile(String token){
+        return ResponseEntity.ok(BaseResponse.<Admin>builder()
+                        .code(200)
+                        .success(true)
+                        .message("Profil bilgileri başarılı şekilde getirildi.")
+                        .data(adminService.getProfile(token))
                 .build());
     }
 }

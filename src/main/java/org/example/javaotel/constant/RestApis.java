@@ -26,6 +26,6 @@ public class RestApis {
 
     public static final String ADMIN_LOGIN = "/admin-login";
     public static final String ADMIN_ADD = "/admin-add";
-
+    public static final String GET_PROFILE = "/get-profile";
 
 }

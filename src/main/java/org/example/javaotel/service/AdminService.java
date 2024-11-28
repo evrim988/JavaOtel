@@ -23,12 +23,22 @@ public class AdminService {
     public String doLogin(@Valid AdminLoginRequestDto dto) {
         Optional<Admin> optionalAdmin = adminRepository.findByUserNameAndPassword(dto.userName(), dto.password());
         if(optionalAdmin.isEmpty())
-            throw new JavaOtelException(ErrorType.ADMIN_NOTFOUND);
+            throw new JavaOtelException(ErrorType.INVALID_USERNAME_OR_PASSWORD);
         String token = jwtManager.createToken(optionalAdmin.get().getId());
         return token;
     }
 
     public void addAdmin(@Valid CreateAdminRequestDto dto) {
         adminRepository.save(AdminMapper.INSTANCE.fromCreateAdminRequestDto(dto));
+    }
+
+    public Admin getProfile(String token) {
+        Optional<Long> optionalAdmin = jwtManager.validateToken(token);
+        if (optionalAdmin.isEmpty())
+            throw new JavaOtelException(ErrorType.INVALID_TOKEN);
+        Optional<Admin> admin = adminRepository.findById(optionalAdmin.get());
+        if(admin.isEmpty())
+            throw new JavaOtelException(ErrorType.ADMIN_NOTFOUND);
+        return admin.get();
     }
 }
